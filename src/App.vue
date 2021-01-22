@@ -1,26 +1,35 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container column">
+    <Form />
+    <Resume />
+  </div>
+  <!-- <div class="container">
+    <Comments />
+  </div> -->
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Form from '@/components/Form.vue'
+import Resume from '@/components/Resume.vue'
+// import Comments from '@/components/Comments.vue'
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
+    Form,
+    Resume,
+    // Comments,
+  },
 }
 </script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style>
+.avatar {
+  display: flex;
+  justify-content: center;
+}
+
+.avatar img {
+  width: 150px;
+  height: auto;
+  border-radius: 50%;
 }
 </style>
