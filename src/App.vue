@@ -1,35 +1,56 @@
 <template>
   <div class="container column">
-    <Form />
-    <Resume />
+    <Form @add-block="addBlock" />
+    <Resume :blocks="blocks" />
   </div>
-  <!-- <div class="container">
-    <Comments />
-  </div> -->
+  <div class="container">
+    <Loader v-if="loading" />
+    <Comments v-else :comments="comments" @load-comments="loadComments" />
+  </div>
 </template>
 
 <script>
 import Form from '@/components/Form.vue'
 import Resume from '@/components/Resume.vue'
-// import Comments from '@/components/Comments.vue'
+import Loader from '@/components/Loader.vue'
+import Comments from '@/components/Comments.vue'
+import axios from 'axios'
+
 export default {
+  data() {
+    return {
+      blocks: [],
+      comments: [],
+      loading: false,
+    }
+  },
+  methods: {
+    addBlock(block) {
+      this.blocks.push(block)
+    },
+    async loadComments() {
+      this.loading = true
+
+      const { data } = await axios.get(
+        'https://jsonplaceholder.typicode.com/comments?_limit=5'
+      )
+
+      this.comments = Object.keys(data).map((comment) => {
+        return {
+          ...data[comment],
+        }
+      })
+
+      this.loading = false
+    },
+  },
   components: {
     Form,
     Resume,
-    // Comments,
+    Loader,
+    Comments,
   },
 }
 </script>
 
-<style>
-.avatar {
-  display: flex;
-  justify-content: center;
-}
-
-.avatar img {
-  width: 150px;
-  height: auto;
-  border-radius: 50%;
-}
-</style>
+<style></style>

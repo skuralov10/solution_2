@@ -1,11 +1,3 @@
 <template>
-  <p>
-    text
-  </p>
+  <p>{{ $attrs.value }}</p>
 </template>
-
-<script>
-export default {}
-</script>
-
-<style lang="scss" scoped></style>

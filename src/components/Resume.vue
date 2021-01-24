@@ -1,43 +1,31 @@
 <template>
   <div class="card card-w70">
-    <!-- <component :is="componentName" v-if="blocks.length"></component> -->
-    <component :is="componentName"></component>
-    <!-- <resumeTitle />
-    <resumeAvatar />
-    <resumeSubtitle />
-    <resumeText /> -->
+    <template v-if="blocks.length">
+      <component
+        v-for="block in blocks"
+        :key="block.id"
+        :is="'Resume-' + block.typeBlock"
+        v-bind="{ value: block.value }"
+      ></component>
+    </template>
 
-    <h3>Добавьте первый блок, чтобы увидеть результат</h3>
+    <h3 v-else>Добавьте первый блок, чтобы увидеть результат</h3>
   </div>
 </template>
 
 <script>
-import resumeTitle from '@/components/resumeTitle'
-import resumeAvatar from '@/components/resumeAvatar'
-import resumeSubtitle from '@/components/resumeSubtitle.vue'
-import resumeText from '@/components/resumeText.vue'
+import ResumeTitle from '@/components/ResumeTitle'
+import ResumeAvatar from '@/components/ResumeAvatar'
+import ResumeSubtitle from '@/components/ResumeSubtitle.vue'
+import ResumeText from '@/components/ResumeText.vue'
 
 export default {
-  data() {
-    return {
-      blocks: [],
-    }
-  },
-  computed: {
-    componentName() {
-      if (this.contentModel === 'title') {
-        return 'resumeTitle'
-      }
-      return 'resumeAvatar'
-    },
-  },
+  props: ['blocks'],
   components: {
-    resumeTitle,
-    resumeAvatar,
-    resumeSubtitle,
-    resumeText,
+    ResumeTitle,
+    ResumeAvatar,
+    ResumeSubtitle,
+    ResumeText,
   },
 }
 </script>
-
-<style lang="scss" scoped></style>

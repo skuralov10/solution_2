@@ -1,9 +1,3 @@
 <template>
-  <h2>textarea.subtitle</h2>
+  <h2>{{ $attrs.value }}</h2>
 </template>
-
-<script>
-export default {}
-</script>
-
-<style lang="scss" scoped></style>
